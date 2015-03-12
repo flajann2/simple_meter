@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+puts 'Null Server -- accepts connections and throws away the data. Ctrl-C to nuke.'
+
+SIMETER_PATH = File.expand_path '..', File.dirname(__FILE__)
+SIMETER_EXECUTABLE = File.expand_path 'bin/simeter', Dir.pwd
+
+%w{ lib sample_data }.each do |dir|
+  $:.unshift File.join([SIMETER_PATH, dir])
+end
+
+require 'simple_meter/cli'
+require 'null_gun'
+
+Simple::Gun::Target.run
